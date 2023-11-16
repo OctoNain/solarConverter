@@ -10,6 +10,9 @@ int average_load();
 /* The value of production ratio depends upon how much sunlight is available to your panel */
 /* function returns a floating point as the value of production ratios ranges between 1.6-1.2 */
 float productionRatio();
+/* This function will take the average load and production ratio as parameters and 
+use them to help calculate the number of solar panels required for our system */
+int numberOfPanels(int,int);
 int main()
 {
     float averageSum=productionRatio();
@@ -101,4 +104,9 @@ int average_load()
      return (sum = sum/12);
     
 
+}
+int numberOfPanels(int pr,int systemLoad)
+{
+    /* The formula for calcualting number of panels is 
+    numberOfPanels = systemload/productionRation/panelWattage */
 }
