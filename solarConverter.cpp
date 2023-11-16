@@ -2,17 +2,19 @@
 he needs to go solar for every functionality our app needs we will define separate
 functions and use prototyping */
 #include<iostream>
+/* Including the library which allows us to use the floor function */
+#include<cmath>
 /* First we need to ask the user about the load of his house accros the year 
 then sum it to calculate the average load that his house has. */
 /* This function will calculate the average annual load of the house for a single year 
 and then return it's value */
-int averageLoad();
+float averageLoad();
 /* The value of production ratio depends upon how much sunlight is available to your panel */
 /* function returns a floating point as the value of production ratios ranges between 1.6-1.2 */
 float productionRatio();
 /* This function will take the average load and production ratio as parameters and 
 use them to help calculate the number of solar panels required for our system */
-int numberOfPanels(float,int);
+float numberOfPanels(float,double);
 int main()
 {
     bool exit = true;
@@ -23,15 +25,17 @@ int main()
         <<std::endl;
         /* Declaring and defining the variable systemload having a value returned by the function
         averageLoad() */
-        int systemLoad{averageLoad()};
+        float systemLoad{averageLoad()};
+        std::cout<<systemLoad<<std::endl;
         std::cout<<"We also need to calculate a constant called Production Ratio which decides the input to output"
         <<std::endl<<"power ratio of your solar panel for this we need to know :"<<std::endl;
         /* Again declaring and defining a floating point having value returned by the function 
         productionRatio() */
         float pr{productionRatio()};
         std::cout<<"Now to calculate the number of panels you need we need to know :"<<std::endl;
-        int noOfPanels{numberOfPanels(pr,systemLoad)};
-        std::cout<<"You need "<<noOfPanels<<" according to the data provided"<<std::endl;
+        float noOfPanels{numberOfPanels(pr,11000)};
+        /* ceil function rounds up the decimal numbers in c++  */
+        std::cout<<"You need "<<floor(noOfPanels)<<" panels according to the data provided"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
         std::cin>>ans;
@@ -53,9 +57,11 @@ float productionRatio()
     std::cout<<"Amount of sunlight that tocuhes your building in summer :"<<std::endl
     <<"1. Ample"<<std::endl<<"2. Fair"<<std::endl<<"3. Faint"<<std::endl;
     std::cin>>choiceSummer;
+    system("cls");
     std::cout<<"Amount of sunlight that tocuhes your building in winter :"<<std::endl
     <<"1. Ample"<<std::endl<<"2. Fair"<<std::endl<<"3. Faint"<<std::endl;
     std::cin>>choiceWinter;
+    system("cls");
     /* If ample sunlight touches throught the year production ratio will always be 1.6 */
     if (choiceSummer==1 && choiceWinter == 1)
     {
@@ -109,17 +115,19 @@ float productionRatio()
 
 
 }
-int averageLoad()
+float averageLoad()
 {   
     /* We are using two unsigned integers as the Electrical Energy consumed by a house can 
     never be negative and the sum of that energy can never be negatvie either  */
-    unsigned int load;
-    double sum =0;
+    float load;
+    float sum =0.0f;
     /* Where are using a for loop because we will never need more than 12 itterations */
     /* the use of usnigned int "i" is becuase we never want it to be negative */
     for (unsigned int  i = 1; i <= 12; i++)
     {
-        std::cout<<"What was the Electrical load requirement of your house for month "<<i<<std::endl;
+        system("cls");
+        std::cout<<"What was the Electrical load requirement of your house for month "<<i<<std::endl
+        <<"please provide the input in killo-watts/hour only !!!!!!!!!!"<<std::endl;
         std::cin>>load;
         /* Adds new values to the previous sum */
         sum=sum+load;
@@ -129,7 +137,7 @@ int averageLoad()
     
 
 }
-int numberOfPanels(float pr,int systemLoad)
+float numberOfPanels(float pr,double systemLoad)
 {
     /* The formula for calcualting number of panels is 
     numberOfPanels = systemload/productionRation/panelWattage */
@@ -139,6 +147,6 @@ int numberOfPanels(float pr,int systemLoad)
     <<"Most panles have wattage ratings between 250 - 400, averaging about 300 watts"<<std::endl;
     /* Taking the wattage input */
     std::cin>>panelWattage;
-    float panels= systemLoad/(pr/panelWattage);
-    return(static_cast<int>(panels));
+    return(systemLoad/(pr*panelWattage));
+    
 }
