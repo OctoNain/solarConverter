@@ -2,7 +2,7 @@
 he needs to go solar for every functionality our app needs we will define separate
 functions and use prototyping */
 #include<iostream>
-/* Including the library which allows us to use the floor function */
+/* Including the library which allows us to use the floor/ceil function */
 #include<cmath>
 /* First we need to ask the user about the load of his house accros the year 
 then sum it to calculate the average load that his house has. */
@@ -35,7 +35,7 @@ int main()
         std::cout<<"Now to calculate the number of panels you need we need to know :"<<std::endl;
         float noOfPanels{numberOfPanels(pr,11000)};
         /* ceil function rounds up the decimal numbers in c++  */
-        std::cout<<"You need "<<floor(noOfPanels)<<" panels according to the data provided"<<std::endl;
+        std::cout<<"You need "<<ceil(noOfPanels)<<" panels according to the data provided"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
         std::cin>>ans;
@@ -117,8 +117,6 @@ float productionRatio()
 }
 float averageLoad()
 {   
-    /* We are using two unsigned integers as the Electrical Energy consumed by a house can 
-    never be negative and the sum of that energy can never be negatvie either  */
     float load;
     float sum =0.0f;
     /* Where are using a for loop because we will never need more than 12 itterations */
@@ -140,7 +138,7 @@ float averageLoad()
 float numberOfPanels(float pr,double systemLoad)
 {
     /* The formula for calcualting number of panels is 
-    numberOfPanels = systemload/productionRation/panelWattage */
+    numberOfPanels = systemload/(productionRation*panelWattage) */
     /* this integer will store the panel wattage amount given to us by the user */
     int panelWattage;
     std::cout<<"How many wattage of power can the panel you plan on using output ?"<<std::endl
