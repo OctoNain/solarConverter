@@ -109,4 +109,11 @@ int numberOfPanels(int pr,int systemLoad)
 {
     /* The formula for calcualting number of panels is 
     numberOfPanels = systemload/productionRation/panelWattage */
+    /* this integer will store the panel wattage amount given to us by the user */
+    int panelWattage;
+    std::cout<<"How many wattage of power can the panel you plan on using output ?"<<std::endl
+    <<"Most panles have wattage ratings between 250 - 400, averaging about 300 watts"<<std::endl;
+    /* Taking the wattage input */
+    std::cin>>panelWattage;
+    return (systemLoad/(pr/panelWattage));
 }
