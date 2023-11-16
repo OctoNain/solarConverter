@@ -31,7 +31,7 @@ int main()
         float pr{productionRatio()};
         std::cout<<"Now to calculate the number of panels you need we need to know :"<<std::endl;
         int noOfPanels{numberOfPanels(pr,systemLoad)};
-        std::cout<<"You need "<<noOfPanels<<"according to the data provided"<<std::endl;
+        std::cout<<"You need "<<noOfPanels<<" according to the data provided"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
         std::cin>>ans;
