@@ -15,6 +15,8 @@ float productionRatio();
 /* This function will take the average load and production ratio as parameters and 
 use them to help calculate the number of solar panels required for our system */
 float numberOfPanels(float,double);
+/* A function that helps us calculate the number of battiers required for the solar system */
+int numberOfBattiers(int,float);
 int main()
 {
     bool exit = true;
@@ -36,6 +38,12 @@ int main()
         float noOfPanels{numberOfPanels(pr,11000)};
         /* ceil function rounds up the decimal numbers in c++  */
         std::cout<<"You need "<<ceil(noOfPanels)<<" panels according to the data provided"<<std::endl;
+        /* Now to calculate the number of batteries required for the system ? we need to ask the user 
+        the back-up time required by the batteries to run */
+        std::cout<<"In case of shortage of powers for how long would you need to run your electrical system"
+        <<"On Batteries (Please specify your answer in hours)"<<std::endl;
+        int hours;
+        std::cin>>hours;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
         std::cin>>ans;
@@ -147,4 +155,8 @@ float numberOfPanels(float pr,double systemLoad)
     std::cin>>panelWattage;
     return(systemLoad/(pr*panelWattage));
     
+}
+int numberOfBattiers(int time,float load)
+{
+    std::cout<<"to be done later"<<std::endl;
 }
