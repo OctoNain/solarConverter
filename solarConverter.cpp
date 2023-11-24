@@ -42,8 +42,11 @@ int main()
         the back-up time required by the batteries to run */
         std::cout<<"In case of shortage of powers for how long would you need to run your electrical system"
         <<"On Batteries (Please specify your answer in hours)"<<std::endl;
+        /* Backup time can be half an hour hence using floating point */
         float hours;
         std::cin>>hours;
+        /* defining and initializing a floating point according to the return value 
+        from the function numberOfBatteries */
         float Batteries{numberOfBattiers(hours,systemLoad)};
         std::cout<<"You need "<<Batteries<<" battieres"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
@@ -160,11 +163,14 @@ float numberOfBattiers(float time,float load)
     int calculatedLoad,ampsPerHour,volts;
     float batteryload;
     char temp;
+    /* Converting the load from kilo-watts to watts  */
     load *=1000;
     std::cout<<"Please Input specifications of your battery in the format ampsPerHour"<<
     " : volts"<<std::endl;
     std::cin>>ampsPerHour>>temp>>volts;
+    /* Calculating the load battery can provide */
     calculatedLoad = ampsPerHour * volts;
+    /* Calculating for how long a single battery will run the average provided load */
     batteryload = calculatedLoad / load;
-    return time/batteryload;
+    return floor(time/batteryload);
 }
