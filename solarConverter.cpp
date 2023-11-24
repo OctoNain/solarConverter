@@ -17,6 +17,8 @@ use them to help calculate the number of solar panels required for our system */
 float numberOfPanels(float,double);
 /* A function that helps us calculate the number of battiers required for the solar system */
 float numberOfBattiers(float,float);
+/* A function that helps decide the rating for your UPS/Inverter Rating */
+int inverterRating(float );
 int main()
 {
     bool exit = true;
@@ -40,7 +42,7 @@ int main()
         std::cout<<"You need "<<ceil(noOfPanels)<<" panels according to the data provided"<<std::endl;
         /* Now to calculate the number of batteries required for the system ? we need to ask the user 
         the back-up time required by the batteries to run */
-        std::cout<<"In case of shortage of powers for how long would you need to run your electrical system"
+        std::cout<<"In case of shortage of powers for how long would you need to run your electrical system "
         <<"On Batteries (Please specify your answer in hours)"<<std::endl;
         /* Backup time can be half an hour hence using floating point */
         float hours;
@@ -49,6 +51,8 @@ int main()
         from the function numberOfBatteries */
         float Batteries{numberOfBattiers(hours,systemLoad)};
         std::cout<<"You need "<<Batteries<<" battieres"<<std::endl;
+        int ups{inverterRating(systemLoad)};
+        std::cout<<"Your inverter rating should be "<<ups<<" watts"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
         std::cin>>ans;
@@ -173,4 +177,11 @@ float numberOfBattiers(float time,float load)
     /* Calculating for how long a single battery will run the average provided load */
     batteryload = calculatedLoad / load;
     return floor(time/batteryload);
+}
+int inverterRating(float load)
+{
+    /* Your inverter rating should always be 25% more than your desired load */
+    int Load;
+    Load =load + (load*(25/100));
+    return load;
 }
