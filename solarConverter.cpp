@@ -16,7 +16,7 @@ float productionRatio();
 use them to help calculate the number of solar panels required for our system */
 float numberOfPanels(float,double);
 /* A function that helps us calculate the number of battiers required for the solar system */
-int numberOfBattiers(int,float);
+float numberOfBattiers(float,float);
 int main()
 {
     bool exit = true;
@@ -42,16 +42,15 @@ int main()
         the back-up time required by the batteries to run */
         std::cout<<"In case of shortage of powers for how long would you need to run your electrical system"
         <<"On Batteries (Please specify your answer in hours)"<<std::endl;
-        int hours;
+        float hours;
         std::cin>>hours;
+        float Batteries{numberOfBattiers(hours,systemLoad)};
+        std::cout<<"You need "<<Batteries<<" battieres"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
         std::cin>>ans;
         if (ans == 'n')
             exit=false;
-
-
-
     }
 
 
@@ -156,7 +155,16 @@ float numberOfPanels(float pr,double systemLoad)
     return(systemLoad/(pr*panelWattage));
     
 }
-int numberOfBattiers(int time,float load)
+float numberOfBattiers(float time,float load)
 {
-    std::cout<<"to be done later"<<std::endl;
+    int calculatedLoad,ampsPerHour,volts;
+    float batteryload;
+    char temp;
+    load *=1000;
+    std::cout<<"Please Input specifications of your battery in the format ampsPerHour"<<
+    " : volts"<<std::endl;
+    std::cin>>ampsPerHour>>temp>>volts;
+    calculatedLoad = ampsPerHour * volts;
+    batteryload = calculatedLoad / load;
+    return time/batteryload;
 }
