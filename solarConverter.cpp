@@ -19,6 +19,8 @@ float numberOfPanels(float,double);
 float numberOfBattiers(float,float);
 /* A function that helps decide the rating for your UPS/Inverter Rating */
 int inverterRating(float );
+/* A function that calculates the charging current required by the battery system */
+int chargingCurrent(int numberOfBatteries);
 int main()
 {
     bool exit = true;
@@ -52,6 +54,7 @@ int main()
         float Batteries{numberOfBattiers(hours,systemLoad)};
         std::cout<<"You need "<<Batteries<<" battieres"<<std::endl;
         int ups{inverterRating(systemLoad)};
+        int current{chargingCurrent(Batteries)};
         std::cout<<"Your inverter rating should be "<<ups<<" watts"<<std::endl;
         std::cout<<"Do you wish to make another calculation (y/n) ?"<<std::endl;
         char ans;
@@ -184,4 +187,10 @@ int inverterRating(float load)
     int Load;
     Load =load + (load*(25/100));
     return load;
+}
+int chargingCurrent( int numberOfBatteries)
+{
+    /* The charging current required by the batteries is 1/10th the amperage 
+    of the batteries */
+    return numberOfBatteries/10;
 }
